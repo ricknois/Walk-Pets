@@ -1,12 +1,12 @@
+/* eslint-disable react/jsx-filename-extension */
 import React, { useState, useEffect } from 'react';
-import { Container, List } from './styles';
-import Pet from '../../components/Pet';
-import { StyleSheet, Platform } from 'react-native';
+import { Platform } from 'react-native';
 import Constants from 'expo-constants';
 import * as Notifications from 'expo-notifications';
 import * as Permissions from 'expo-permissions';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-
+import { Container, List } from './styles';
+import Pet from '../../components/Pet';
+import { getData, storeData } from '../../helper';
 
 Notifications.setNotificationHandler({
   handleNotification: async () => ({
@@ -17,70 +17,40 @@ Notifications.setNotificationHandler({
 });
 
 export default function Pets () {
-  const [token, setToken] = useState(null)
+  const [token, setToken] = useState(null);
+  const [data, setData] = useState([]);
 
   useEffect(() => {
+    handleInitialStorage();
     registerForPushNotificationsAsync().then(token => {
       setToken(token);
     });
     enableNotification();
   }, [])
 
-  const DATA = [
-    {
-      id: 1,
-      name: 'Bobiiiiiiiiiiiii',
-      mood: 3,
-      walks: [
-        {
-          day: '05/03/2020',
-          times: 1
-        }, ]
-    },
-    { id: 2,
-      name: 'Laila',
-      mood: 1,
-      walks: [
-        {
-          day: '05/03/2020',
-          times: 1
-        },] 
-    },
-    {
-      id: 3,
-      name: 'Meggie',
-      mood: 2,
-      walks: [
-        {
-          day: '05/03/2020',
-          times: 1
-        }, ]
-    },
-  ];
-
+  const handleInitialStorage = async () => {
+    const aux = await getData('walks');
+    if (!aux) {
+      await storeData('walks', []);
+    }
+    setData(aux);
+  };
 
   return (
     <Container>
       <List
         numColumns={1}
-        contentContainerStyle={styles.list}
-        data={DATA}
+        data={data}
         renderItem={({ item }) => (
           <Pet
-            pet={ item }
+            pet={item}
         />
         )}
-        keyExtractor={ item => item.name }
+        keyExtractor={item => item.name}
       />
     </Container>
   );
 }
-
-const styles = StyleSheet.create({
-  list: {
-    
-  }
-})
 
 function enableNotification() {
   Notifications.cancelAllScheduledNotificationsAsync();
