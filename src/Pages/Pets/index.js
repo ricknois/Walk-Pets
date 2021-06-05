@@ -16,17 +16,16 @@ Notifications.setNotificationHandler({
   }),
 });
 
-export default function Pets () {
+export default function Pets ({ navigation }) {
   const [token, setToken] = useState(null);
   const [data, setData] = useState([]);
 
   useEffect(() => {
-    handleInitialStorage();
-    registerForPushNotificationsAsync().then(token => {
-      setToken(token);
-    });
+    console.log('oiiii')
+    registerForPushNotificationsAsync().then(token => { setToken(token) });
     enableNotification();
-  }, [])
+    navigation.addListener('focus', () =>  handleInitialStorage());
+  }, [navigation]);
 
   const handleInitialStorage = async () => {
     const aux = await getData('walks');
@@ -44,6 +43,7 @@ export default function Pets () {
         renderItem={({ item }) => (
           <Pet
             pet={item}
+            setData={setData}
         />
         )}
         keyExtractor={item => item.name}

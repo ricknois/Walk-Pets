@@ -9,7 +9,7 @@ import { storeData, getData, formateDate } from '../../helper';
 
 import { Container, InputName } from './styles';
 
-export default function index() {
+export default function index({ navigation }) {
   const [name, setName] = useState(null);
   const [icon, setIcon] = useState(null);
   const [time, setTime] = useState(null);
@@ -53,7 +53,7 @@ export default function index() {
         image: icon,
       };
       await storeData('walks', [...aux, obj]);
-      return true;
+      return navigation.navigate('Pets');
     }
     return Alert.alert('Hey !!', 'Fill in all fields');
   };
