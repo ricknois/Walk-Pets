@@ -1,13 +1,15 @@
 /* eslint-disable react/jsx-filename-extension */
 import React, { useState, useEffect } from 'react';
 import {
-  Button, Image, Alert,
+  Image, Alert, Platform,
 } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { storeData, getData, formateDate } from '../../helper';
 
-import { Container, InputName } from './styles';
+import {
+  Container, InputName, Buttons, TouchableText,
+} from './styles';
 
 export default function index({ navigation }) {
   const [name, setName] = useState(null);
@@ -40,7 +42,7 @@ export default function index({ navigation }) {
 
   const handleTime = (event, selectedDate) => {
     setShowTime(false);
-    setTime(formateDate(selectedDate));
+    if (selectedDate) setTime(formateDate(selectedDate));
   };
 
   const handleSave = async () => {
@@ -60,10 +62,14 @@ export default function index({ navigation }) {
 
   return (
     <Container>
+      {icon && <Image source={{ uri: icon }} style={{ width: 150, height: 150 }} />}
       <InputName placeholder="Name" onChangeText={(text) => setName(text)} />
-      <Button onPress={pickImage} title="Pick an image from camera roll" />
-      {icon && <Image source={{ uri: icon }} style={{ width: 200, height: 200 }} />}
-      <Button onPress={() => setShowTime(true)} title="Pick an time to be notificated" />
+      <Buttons onPress={pickImage}>
+        <TouchableText>Pick an image from camera roll</TouchableText>
+      </Buttons>
+      <Buttons color="#841584" onPress={() => setShowTime(true)}>
+        <TouchableText>Pick an time to be notificated</TouchableText>
+      </Buttons>
       {
         showTime
           ? (
@@ -77,7 +83,9 @@ export default function index({ navigation }) {
           )
           : null
       }
-      <Button onPress={() => handleSave()} title="Salvar" />
+      <Buttons onPress={() => handleSave()}>
+        <TouchableText>Save</TouchableText>
+      </Buttons>
     </Container>
 
   );
