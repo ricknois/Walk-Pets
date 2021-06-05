@@ -3,11 +3,11 @@ import { Dimensions } from 'react-native';
 
 export const Container = styled.View`
   align-self: center;
-  margin: ${Math.round(Dimensions.get('window').width/15)}px;
+  margin: ${Math.round(Dimensions.get('window').width / 15)}px;
   background-color: #3767B5;
   width: 80%;
-  height: ${Math.round(Dimensions.get('window').width/2.3)}px;
-  border-radius: ${Math.round(Dimensions.get('window').width/25)}px;
+  height: ${Math.round(Dimensions.get('window').width / 2.3)}px;
+  border-radius: ${Math.round(Dimensions.get('window').width / 25)}px;
   border-width: 2px;
 `;
 export const ModalView = styled.View`
@@ -17,7 +17,7 @@ export const ModalView = styled.View`
 `;
 
 export const Logo = styled.Image`
-  margin-top: -${Math.round(Dimensions.get('window').width/20)}px;
+  margin-top: -${Math.round(Dimensions.get('window').width / 20)}px;
   width: 50px;
   height: 50px;
   border-radius: 25px;
@@ -27,11 +27,11 @@ export const Logo = styled.Image`
 export const Name = styled.Text`
   margin-top:  ${Dimensions.get('window').height / 50}px;
   align-self: center;
-  font-size: 20;
+  font-size: 20px;
 `;
 export const Walk = styled.Text`
   margin-top:  ${Dimensions.get('window').height / 50}px;
-  font-size: 15;
+  font-size: 15px;
   text-align: center;
   align-self: center;
 `;

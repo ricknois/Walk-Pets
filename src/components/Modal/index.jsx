@@ -1,20 +1,18 @@
 import React from 'react';
-import { StyleSheet, Text, TouchableHighlight, View } from 'react-native';
+import {
+  StyleSheet, Text, TouchableHighlight, View,
+} from 'react-native';
 import { getData, storeData } from '../../helper';
-import { useNavigation } from '@react-navigation/native';
 
 export default function App(props) {
   const { setModalVisible, pet, setData } = props;
-  const navigation = useNavigation();
 
   const handleWalk = async () => {
     const storage = await getData('walks');
     storage.forEach((item) => {
       if (item.name === pet.name) {
-          console.log(item.lastWalk);
-          item.lastWalk = new Date();
-          console.log(item.lastWalk);
-       }   
+        item.lastWalk = new Date();
+      }
     });
     await storeData('walks', storage);
     setData(storage);
@@ -25,11 +23,12 @@ export default function App(props) {
       <View style={styles.modalView}>
         <Text style={styles.modalText}>{pet.name}</Text>
         <TouchableHighlight
-          style={styles.openButton }
+          style={styles.openButton}
           onPress={() => {
             handleWalk(pet);
             setModalVisible(false);
-          }}>
+          }}
+        >
           <Text style={styles.textStyle}>Walk !</Text>
         </TouchableHighlight>
       </View>

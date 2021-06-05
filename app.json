@@ -1,12 +1,11 @@
 {
   "expo": {
-    "name": "walk-the-dog",
-    "slug": "walk-the-dog",
+    "name": "Walk Pets",
+    "slug": "WalkPets",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "splash": {
-      "image": "./assets/splash.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
@@ -20,9 +19,14 @@
       "supportsTablet": true
     },
     "android": {
+      "package": "com.ricksousa.WalkPets",
+      "versionCode": 1,
+      "permissions": [ "CAMERA" ],
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
+      },
+      "config": {
+        "googleMobileAdsAppId": "ca-app-pub-1269207393202968~8155425990"
       }
     },
     "web": {

@@ -6,7 +6,7 @@ import Router from './src/router';
 export default function App() {
   return (
     <>
-      <StatusBar style="dark" translucent={true}/>
+      <StatusBar style="dark" translucent />
       <Router />
     </>
   );

@@ -1,11 +1,10 @@
-/* eslint-disable react/jsx-filename-extension */
 import React, { useState, useEffect } from 'react';
 import {
   Image, Alert, Platform,
 } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
-import DateTimePicker from '@react-native-community/datetimepicker';
-import { storeData, getData, formateDate } from '../../helper';
+import AdBanner from '../../components/AdBanner';
+import { storeData, getData } from '../../helper';
 
 import {
   Container, InputName, Buttons, TouchableText,
@@ -14,8 +13,6 @@ import {
 export default function index({ navigation }) {
   const [name, setName] = useState(null);
   const [icon, setIcon] = useState(null);
-  const [time, setTime] = useState(null);
-  const [showTime, setShowTime] = useState(false);
 
   useEffect(() => {
     (async () => {
@@ -40,18 +37,12 @@ export default function index({ navigation }) {
     }
   };
 
-  const handleTime = (event, selectedDate) => {
-    setShowTime(false);
-    if (selectedDate) setTime(formateDate(selectedDate));
-  };
-
   const handleSave = async () => {
-    if (name && icon && time) {
+    if (name && icon) {
       const aux = await getData('walks');
       const obj = {
         name,
         lastWalk: new Date(),
-        walkTime: time,
         image: icon,
       };
       await storeData('walks', [...aux, obj]);
@@ -67,25 +58,10 @@ export default function index({ navigation }) {
       <Buttons onPress={pickImage}>
         <TouchableText>Pick an image from camera roll</TouchableText>
       </Buttons>
-      <Buttons color="#841584" onPress={() => setShowTime(true)}>
-        <TouchableText>Pick an time to be notificated</TouchableText>
-      </Buttons>
-      {
-        showTime
-          ? (
-            <DateTimePicker
-              value={new Date()}
-              mode="time"
-              is24Hour
-              display="default"
-              onChange={handleTime}
-            />
-          )
-          : null
-      }
       <Buttons onPress={() => handleSave()}>
         <TouchableText>Save</TouchableText>
       </Buttons>
+      <AdBanner />
     </Container>
 
   );
