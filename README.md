@@ -113,8 +113,6 @@ The following tools were used in the construction of the project:
 
 Made with love by **Rick Sousa** 👋🏽 [Get in Touch!](https://www.linkedin.com/in/ricknois/)
 
-- Website: ricknois.github.io
-
 - Github: [@ricknois](https://github.com/ricknois)
 
 - Linkedin: [Rick Sousa](https://www.linkedin.com/in/ricknois/) 
